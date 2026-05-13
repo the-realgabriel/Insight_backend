@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Supabase Clone (Local)",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "supabase_clone",
+      "Username": "postgres",
+      "SSLMode": "prefer",
+      "PassFile": "/pgpassfile"
+    }
+  }
+}
