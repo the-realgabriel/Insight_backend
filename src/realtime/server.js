@@ -18,7 +18,7 @@ export async function startRealtime(server) {
   // Start listening to Postgres notifications
   const pgClient = await getListenClient();
   await pgClient.query('LISTEN table_changes');
-  console.log('🔌 Realtime: listening on Postgres channel "table_changes"');
+  console.log(' Realtime: listening on Postgres channel "table_changes"');
 
   pgClient.on('notification', (msg) => {
     try {
@@ -108,6 +108,6 @@ export async function startRealtime(server) {
     ws.send(JSON.stringify({ type: 'connected', message: 'Send {"type":"auth","token":"<JWT>"} to authenticate' }));
   });
 
-  console.log('🔌 Realtime WebSocket server started at /realtime/v1/websocket');
+  console.log(' Realtime WebSocket server started at /realtime/v1/websocket');
   return wss;
 }

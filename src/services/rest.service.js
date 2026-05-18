@@ -15,7 +15,8 @@ const OPERATORS = {
 // Tables accessible via the REST API (whitelist for security)
 const ALLOWED_TABLES = new Set([
   'user_profiles',
-  // Add more tables here as you create them
+  'wiki_pages',
+  'wiki_files',
 ]);
 
 export function validateTable(tableName) {

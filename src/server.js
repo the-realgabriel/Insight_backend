@@ -1,11 +1,13 @@
 import Fastify from 'fastify';
 import fastifyJwt from '@fastify/jwt';
 import fastifyCors from '@fastify/cors';
+import fastifyMultipart from '@fastify/multipart';
 import { createServer } from 'http';
 
 import { initDb } from './db/init.js';
 import { authRoutes } from './routes/auth.routes.js';
 import { restRoutes } from './routes/rest.routes.js';
+import { uploadRoutes } from './routes/upload.routes.js';
 import { startRealtime } from './realtime/server.js';
 
 // Load env vars (in production use a proper dotenv loader or Docker secrets)
@@ -36,9 +38,17 @@ await fastify.register(fastifyJwt, {
   sign: { algorithm: 'HS256' }
 });
 
+// File uploads
+await fastify.register(fastifyMultipart, {
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB
+  },
+});
+
 // Routes
 await fastify.register(authRoutes);
 await fastify.register(restRoutes);
+await fastify.register(uploadRoutes);
 
 // Health check
 fastify.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));
